@@ -14,21 +14,57 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    company: []
+    basicFinancials: [],
+    companyProfile: [],
+    quote: []
   },
   actions: {
-    retrieveCompanyOverview: ({ commit }, payload) => {
+    retrieveQuote: ({ commit }, payload) => {
+      return new Promise((resolve, reject) => {
+        Vue.axios
+          .get(`${baseURL}/quote?symbol=${payload.ticker}&token=${tokenKey}`)
+          .then(resp => {
+            commit("updateQuote", resp.data);
+            resolve();
+          })
+          .catch(err => {
+            // @TODO create proper error response handling
+            console.log(err);
+            reject();
+          });
+      });
+    },
+
+    retrieveCompanyProfile: ({ commit }, payload) => {
+      return new Promise((resolve, reject) => {
+        Vue.axios
+          .get(
+            `${baseURL}/stock/profile2?symbol=${payload.ticker}&token=${tokenKey}`
+          )
+          .then(resp => {
+            commit("updateCompanyProfile", resp.data);
+            resolve();
+          })
+          .catch(err => {
+            // @TODO create proper error response handling
+            console.log(err);
+            reject();
+          });
+      });
+    },
+
+    retrieveBasicFinancials: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         Vue.axios
           .get(
             `${baseURL}/stock/metric?symbol=${payload.ticker}&metric=all&token=${tokenKey}`
           )
           .then(resp => {
-            commit("updateCompanyOverview", resp.data);
-            console.log(resp.data);
+            commit("updateBasicFinancials", resp.data);
             resolve();
           })
           .catch(err => {
+            // @ TODO create proper error response handling
             console.log(err);
             reject();
           });
@@ -36,8 +72,16 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updateCompanyOverview: (state, data) => {
-      state.company = data;
+    updateQuote: (state, data) => {
+      state.quote = data;
+    },
+
+    updateCompanyProfile: (state, data) => {
+      state.companyProfile = data;
+    },
+
+    updateBasicFinancials: (state, data) => {
+      state.basicFinancials = data;
     }
   },
   modules: {}
