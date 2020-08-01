@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 Vue.use(VueAxios, axios);
 
-const baseURL = "https:/finnhub.io/api/v1";
+const finnURL = "https:/finnhub.io/api/v1";
 const alphaURL = "https://www.alphavantage.co/query?function=";
 const apiKey = process.env.VUE_APP_ALPHAVANTAGE_API_KEY;
 const tokenKey = process.env.VUE_APP_FINNHUB_API_KEY;
@@ -76,7 +76,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         Vue.axios
           .get(
-            `${baseURL}/stock/profile2?symbol=${payload.ticker}&token=${tokenKey}`
+            `${finnURL}/stock/profile2?symbol=${payload.ticker}&token=${tokenKey}`
           )
           .then(resp => {
             commit("updateFinnhubProfile", resp.data);
@@ -92,7 +92,7 @@ export default new Vuex.Store({
     retrieveQuote: ({ commit }, payload) => {
       return new Promise((resolve, reject) => {
         Vue.axios
-          .get(`${baseURL}/quote?symbol=${payload.ticker}&token=${tokenKey}`)
+          .get(`${finnURL}/quote?symbol=${payload.ticker}&token=${tokenKey}`)
           .then(resp => {
             commit("updateQuote", resp.data);
             resolve();
