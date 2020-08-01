@@ -121,7 +121,6 @@ export default {
 
   methods: {
     async retrieveStockInfo() {
-      this.infoStatus = true;
       this.loading = true;
       const payload = {
         ticker: this.stockTicker.toUpperCase()
@@ -131,6 +130,7 @@ export default {
       await this.$store.dispatch("retrieveIncomeStatement", payload);
       await this.$store.dispatch("retrieveFinnhubProfile", payload);
       await this.$store.dispatch("retrieveQuote", payload);
+      this.infoStatus = true;
       this.loading = false;
     }
   },
