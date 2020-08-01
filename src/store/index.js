@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 Vue.use(VueAxios, axios);
 
-const finnURL = "https:/finnhub.io/api/v1";
+const finnURL = "https://finnhub.io/api/v1";
 const alphaURL = "https://www.alphavantage.co/query?function=";
 const apiKey = process.env.VUE_APP_ALPHAVANTAGE_API_KEY;
 const tokenKey = process.env.VUE_APP_FINNHUB_API_KEY;
