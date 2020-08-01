@@ -1,5 +1,7 @@
 # finnhub-stock
 
+![Screenshot](vue-finnhub-stock.png)
+
 ## Project setup
 ```
 npm install
