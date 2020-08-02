@@ -2,6 +2,11 @@
 
 ![Screenshot](vue-finnhub-stock.png)
 
+This project is meant to accept a stock ticker (ex. AMZN, AAPL, FB, TSLA) and provide a company overview, financials, and company news. 
+This project utilizes Vue.js and Bootstrap 4 alongside multiple stock APIs (Finnhub and AlphaVantage).
+
+Check out this project at https://vue-stock-info.netlify.app/
+
 ## Project setup
 ```
 npm install
