@@ -3,7 +3,7 @@
     <div class="card-body text-left">
       <h5 class="card-title">Company Overview</h5>
       <div class="row mt-2">
-        <div class="col-4">
+        <div class="col-6">
           <span class="financial-key">Sector:</span>
           <span class="financial-value ml-1">{{ company.Sector }}</span>
         </div>

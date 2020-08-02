@@ -17,6 +17,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     balanceSheet: [],
+    companyNews: [],
     companyOverview: [],
     incomeStatement: [],
     finnhubProfile: [],
@@ -103,27 +104,50 @@ export default new Vuex.Store({
             reject();
           });
       });
+    },
+
+    retrieveCompanyNews: ({ commit }, payload) => {
+      return new Promise((resolve, reject) => {
+        Vue.axios
+          .get(
+            `${finnURL}/company-news?symbol=${payload.ticker}&from=${payload.from}&to=${payload.to}&token=${tokenKey}`
+          )
+          .then(resp => {
+            console.log(resp);
+            commit("updateCompanyNews", resp.data);
+            resolve();
+          })
+          .catch(err => {
+            // @TODO create proper error response handling
+            console.log(err);
+            reject();
+          });
+      });
     }
   },
   mutations: {
-    updateCompanyOverview: (state, data) => {
-      state.companyOverview = data;
+    updateCompanyOverview: (state, overview) => {
+      state.companyOverview = overview;
     },
 
-    updateBalanceSheet: (state, data) => {
-      state.balanceSheet = data;
+    updateBalanceSheet: (state, balanceSheet) => {
+      state.balanceSheet = balanceSheet;
     },
 
-    updateIncomeStatement: (state, data) => {
-      state.incomeStatement = data;
+    updateIncomeStatement: (state, incomeStatement) => {
+      state.incomeStatement = incomeStatement;
     },
 
     updateFinnhubProfile: (state, data) => {
       state.finnhubProfile = data;
     },
 
-    updateQuote: (state, data) => {
-      state.quote = data;
+    updateQuote: (state, quote) => {
+      state.quote = quote;
+    },
+
+    updateCompanyNews: (state, news) => {
+      state.companyNews = news;
     }
   },
   modules: {}

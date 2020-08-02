@@ -6,46 +6,48 @@
         <div class="col-12">
           <span class="financial-key">Market Capitalization:</span>
           <span class="financial-value ml-1">
-            {{
-            formatMarketCap(company.MarketCapitalization)
-            }}
+            {{ formatMarketCap(company.MarketCapitalization) }}
           </span>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-4">
           <span class="financial-key">52 Week Low:</span>
-          <span class="financial-value ml-1">${{ parseFloat(company["52WeekLow"]).toFixed(2) }}</span>
+          <span class="financial-value ml-1"
+            >${{ parseFloat(company["52WeekLow"]).toFixed(2) }}</span
+          >
         </div>
         <div class="col-4">
           <span class="financial-key">52 Week High:</span>
-          <span class="financial-value ml-1">${{ parseFloat(company["52WeekHigh"]).toFixed(2) }}</span>
+          <span class="financial-value ml-1"
+            >${{ parseFloat(company["52WeekHigh"]).toFixed(2) }}</span
+          >
         </div>
         <div class="col-4">
           <span class="financial-key">Analyst Price Target:</span>
-          <span class="financial-value ml-1">${{ company.AnalystTargetPrice }}</span>
+          <span class="financial-value ml-1"
+            >${{ company.AnalystTargetPrice }}</span
+          >
         </div>
       </div>
 
       <div class="row mt-3">
         <div class="col-4">
           <span class="financial-key">EPS:</span>
-          <span class="financial-value ml-1">${{ parseFloat(company.EPS).toFixed(2) }}</span>
+          <span class="financial-value ml-1"
+            >${{ parseFloat(company.EPS).toFixed(2) }}</span
+          >
         </div>
         <div class="col-4">
           <span class="financial-key">PE Ratio:</span>
           <span class="financial-value ml-1">
-            {{
-            parseFloat(company.PERatio).toFixed(2)
-            }}
+            {{ parseFloat(company.PERatio).toFixed(2) }}
           </span>
         </div>
         <div class="col-4">
           <span class="financial-key">PEG Ratio:</span>
           <span class="financial-value ml-1">
-            {{
-            parseFloat(company.PEGRatio).toFixed(2)
-            }}
+            {{ parseFloat(company.PEGRatio).toFixed(2) }}
           </span>
         </div>
       </div>
@@ -55,21 +57,23 @@
           <span
             class="financial-value ml-1"
             v-if="company.DividendPerShare !== 'None'"
-          >${{ parseFloat(company.DividendPerShare).toFixed(2) }}</span>
+            >${{ parseFloat(company.DividendPerShare).toFixed(2) }}</span
+          >
           <span v-else class="ml-1">N/A</span>
         </div>
         <div class="col-4">
           <span class="financial-key">Dividend Yield:</span>
-          <span
-            class="financial-value ml-1"
-          >{{ parseFloat(company.DividendYield * 100).toFixed(1) }}%</span>
+          <span class="financial-value ml-1"
+            >{{ parseFloat(company.DividendYield * 100).toFixed(1) }}%</span
+          >
         </div>
         <div class="col-4">
           <span class="financial-key">Dividend Date:</span>
           <span
             class="financial-value ml-1"
             v-if="company.DividendDate !== 'None'"
-          >{{ dateFormat(company.DividendDate) }}</span>
+            >{{ dateFormat(company.DividendDate) }}</span
+          >
           <span v-else class="ml-1">N/A</span>
         </div>
       </div>
@@ -79,12 +83,15 @@
           <span
             class="financial-value ml-1"
             v-if="company.ExDividendDate !== 'None'"
-          >{{ dateFormat(company.ExDividendDate) }}</span>
+            >{{ dateFormat(company.ExDividendDate) }}</span
+          >
           <span v-else class="ml-1">N/A</span>
         </div>
         <div class="col-4">
           <span class="financial-key">Beta:</span>
-          <span class="financial-value ml-1">{{ parseFloat(company.Beta).toFixed(2) }}</span>
+          <span class="financial-value ml-1">{{
+            parseFloat(company.Beta).toFixed(2)
+          }}</span>
         </div>
         <div class="col-4">
           <span class="financial-key"></span>
