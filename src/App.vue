@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <nav
+      class="navbar navbar-light"
+      style="background-color:#d5d8dc ; height: 60px"
+    >
+      <h4 class="my-auto">Kev's Stock Info</h4>
+    </nav>
     <router-view />
   </div>
 </template>

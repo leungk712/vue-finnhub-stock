@@ -5,7 +5,13 @@
       <div class="card-body text-left">
         <div class="row">
           <div class="col-2">
-            <img :src="news.image" alt="Article image" width="90" height="90" />
+            <img
+              v-if="news.image.length"
+              :src="news.image"
+              alt="Article image"
+              width="90"
+              height="90"
+            />
           </div>
           <div class="col-8">
             <h5 class="card-title">

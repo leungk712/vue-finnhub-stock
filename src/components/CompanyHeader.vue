@@ -1,5 +1,5 @@
 <template>
-  <div class="row my-2 mx-2">
+  <div class="header-container row my-2 mx-2">
     <div class="col-5">
       <div class="company-profile">
         <div class="row">
@@ -101,4 +101,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.header-container {
+  border-bottom: 2px solid #f4f6f6;
+}
+</style>
