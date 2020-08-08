@@ -5,7 +5,11 @@
         <div class="row">
           <div class="col-1">
             <img
-              v-if="this.finnhubProfile && this.finnhubProfile.logo.length"
+              v-if="
+                this.finnhubProfile &&
+                  this.finnhubProfile.logo !== undefined &&
+                  this.finnhubProfile.logo.length
+              "
               :src="finnhubProfile.logo"
               width="80"
               height="80"

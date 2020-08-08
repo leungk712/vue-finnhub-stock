@@ -18,6 +18,10 @@
       </div>
     </div>
 
+    <div v-show="!infoStatus && !loading" class="container-flex px-5 mx-5 mt-5">
+      <CompanyStocks />
+    </div>
+
     <div v-if="loading" class="loading-bar mx-auto mt-3">
       <div class="progress">
         <div
@@ -60,27 +64,25 @@ import CompanyHeader from "@/components/CompanyHeader";
 import CompanyOverview from "@/components/CompanyOverview";
 import CompanyFinancials from "@/components/CompanyFinancials";
 import CompanyNews from "@/components/CompanyNews";
+import CompanyStocks from "@/components/CompanyStocks";
 
 export default {
   components: {
     CompanyHeader,
     CompanyOverview,
     CompanyFinancials,
-    CompanyNews
+    CompanyNews,
+    CompanyStocks
   },
 
   data() {
     return {
-      stockTicker: "",
-
-      loading: false,
-      infoStatus: false
+      stockTicker: ""
     };
   },
 
   methods: {
     async retrieveStockInfo() {
-      this.loading = true;
       const payload = {
         ticker: this.stockTicker.toUpperCase(),
         from: moment()
@@ -89,13 +91,6 @@ export default {
         to: moment().format("YYYY-MM-DD")
       };
       await this.$store.dispatch("retrieveCompanyOverview", payload);
-      await this.$store.dispatch("retrieveBalanceSheet", payload);
-      await this.$store.dispatch("retrieveIncomeStatement", payload);
-      await this.$store.dispatch("retrieveFinnhubProfile", payload);
-      await this.$store.dispatch("retrieveQuote", payload);
-      await this.$store.dispatch("retrieveCompanyNews", payload);
-      this.infoStatus = true;
-      this.loading = false;
     }
   },
 
@@ -106,13 +101,14 @@ export default {
       balanceSheet: state => state.balanceSheet,
       incomeStatement: state => state.incomeStatement,
       finnhubProfile: state => state.finnhubProfile,
-      quote: state => state.quote
+      quote: state => state.quote,
+      loading: state => state.loading,
+      infoStatus: state => state.infoStatus
     })
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .loading-bar {
   width: 58vw;

@@ -21,20 +21,33 @@ export default new Vuex.Store({
     companyOverview: [],
     incomeStatement: [],
     finnhubProfile: [],
-    quote: []
+    quote: [],
+
+    loading: false,
+    infoStatus: false
   },
   actions: {
-    retrieveCompanyOverview: ({ commit }, payload) => {
+    retrieveCompanyOverview: ({ dispatch, commit }, payload) => {
       return new Promise((resolve, reject) => {
         Vue.axios
           .get(`${alphaURL}OVERVIEW&symbol=${payload.ticker}&apikey=${apiKey}`)
           .then(resp => {
+            commit("updateLoading", true);
             commit("updateCompanyOverview", resp.data);
-            resolve();
+            dispatch("retrieveBalanceSheet", payload);
+            dispatch("retrieveIncomeStatement", payload);
+            dispatch("retrieveFinnhubProfile", payload);
+            dispatch("retrieveQuote", payload);
+            dispatch("retrieveCompanyNews", payload);
+            commit("updateInfoStatus", true);
+            setTimeout(() => {
+              commit("updateLoading", false);
+            }, 3500);
+            resolve(true);
           })
           .catch(err => {
-            console.log(err);
-            reject();
+            commit("updateLoading", false);
+            reject(err);
           });
       });
     },
@@ -113,7 +126,6 @@ export default new Vuex.Store({
             `${finnURL}/company-news?symbol=${payload.ticker}&from=${payload.from}&to=${payload.to}&token=${tokenKey}`
           )
           .then(resp => {
-            console.log(resp);
             commit("updateCompanyNews", resp.data);
             resolve();
           })
@@ -148,6 +160,14 @@ export default new Vuex.Store({
 
     updateCompanyNews: (state, news) => {
       state.companyNews = news;
+    },
+
+    updateLoading: (state, loadStatus) => {
+      state.loading = loadStatus;
+    },
+
+    updateInfoStatus: (state, status) => {
+      state.infoStatus = status;
     }
   },
   modules: {}
